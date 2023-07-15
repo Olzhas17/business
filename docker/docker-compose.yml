@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+    main:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: app
+        container_name: main
+        restart: unless-stopped
+        working_dir: /var/www/html
+        volumes:
+            - ../src/:/var/www/html
+        depends_on:
+            - mysql
+
+    nginx:
+        image: nginx:latest
+        container_name: nginx
+        restart: unless-stopped
+        ports:
+            - "8000:80"
+        volumes:
+            - ../src:/var/www/html
+            - ./conf/nginx:/etc/nginx/conf.d
+        depends_on:
+            - main
+
+    mysql:
+        image: mysql:latest
+        container_name: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: laravel
+        ports:
+            - "3306:3306"
