@@ -20,10 +20,10 @@ class CartProductRequest extends FormRequest
                 'required',
                 'min:1',
                 function ($attribute, $value, $fail) {
-                    foreach($value as $id => $val) {
-                        $product = Product::where('id', $id)->first();
+                    foreach($value as $val) {
+                        $product = Product::where('id', $val['product_id'])->first();
                         if ($product === null) {
-                            $fail('The product by id '.$id.' not found');
+                            $fail('The product by id '. $val['product_id'] .' not found');
                         }
                     }
                 }

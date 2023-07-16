@@ -6,7 +6,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 
-class CreateCartProductRepository
+final class CreateCartProductRepository extends BaseCartRepository
 {
     public function create(Cart $cart, array $products): bool
     {
@@ -15,14 +15,8 @@ class CreateCartProductRepository
                 ->map(function ($product) {
                     return ['quantity' => $product['quantity']];
                 });
-
             $cart->products()->sync($productsWithQuantity);
-
-            [$totalPrice, $totalQuantity] = $this->getCartTotalPriceQuantity($products, $cart);
-
-            $cart->setQuantity($totalQuantity)
-                ->setTotalAmount($totalPrice)
-                ->save();
+            $this->recalculateCart($cart, $products);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
 
@@ -30,18 +24,5 @@ class CreateCartProductRepository
         }
 
         return true;
-    }
-
-    public function getCartTotalPriceQuantity(mixed $products, mixed $cart): array
-    {
-        $totalPrice = 0;
-        $totalQuantity = 0;
-        foreach ($products as $index => $product) {
-            $productObj = Product::find($index);
-            $totalQuantity += (int)$product['quantity'];
-            $totalPrice += (int)$productObj->price * (int)$product['quantity'];
-        }
-
-        return [$totalPrice, $totalQuantity];
     }
 }

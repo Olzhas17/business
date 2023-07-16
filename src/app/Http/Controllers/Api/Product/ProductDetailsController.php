@@ -10,7 +10,7 @@ use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProductDetailsController extends BaseProduct
+final class ProductDetailsController extends BaseProduct
 {
     public function __invoke(int $id): JsonResponse|ProductResource
     {

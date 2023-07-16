@@ -11,7 +11,7 @@ use App\Repository\ProductUpdateRepository;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProductUpdateController extends BaseProduct
+final class ProductUpdateController extends BaseProduct
 {
     public function __construct(private readonly ProductUpdateRepository $repository){}
 

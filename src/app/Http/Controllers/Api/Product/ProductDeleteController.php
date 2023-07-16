@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
 
-class ProductDeleteController extends BaseProduct
+final class ProductDeleteController extends BaseProduct
 {
     public function __invoke(int $id): JsonResponse
     {

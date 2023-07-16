@@ -8,7 +8,7 @@ use App\Http\Resources\ProductsResource;
 use App\Repository\GetActiveProductsRepository;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class ProductsGetController
+final class ProductsGetController
 {
     public function __construct(private readonly GetActiveProductsRepository $repository){}
 

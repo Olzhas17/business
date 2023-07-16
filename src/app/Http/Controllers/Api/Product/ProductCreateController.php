@@ -10,7 +10,7 @@ use App\Models\Image;
 use App\Repository\ProductCreateRepository;
 use Illuminate\Support\Facades\Storage;
 
-class ProductCreateController
+final class ProductCreateController
 {
     public function __construct(private readonly ProductCreateRepository $repository){}
 

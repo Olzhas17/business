@@ -7,7 +7,7 @@ namespace App\Repository;
 use App\Http\Requests\Product\ProductCreateRequest;
 use App\Models\Product;
 
-class ProductCreateRepository
+final class ProductCreateRepository
 {
     public function create(ProductCreateRequest $productDto)
     {

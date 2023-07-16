@@ -8,7 +8,7 @@ use App\Http\Resources\ProductsResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class GetUserCartProductsController
+final class GetUserCartProductsController
 {
     public function __invoke(Request $request): AnonymousResourceCollection
     {
