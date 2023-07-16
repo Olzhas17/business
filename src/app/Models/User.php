@@ -40,4 +40,18 @@ class User extends Authenticatable
     {
         return $this->hasOne(Cart::class);
     }
+
+
+    public function getUserCart()
+    {
+        $cart = $this->cart;
+
+        if ($cart === null) {
+            $cart = Cart::create([
+                'user_id' => $this->id,
+            ]);
+        }
+
+        return $cart;
+    }
 }

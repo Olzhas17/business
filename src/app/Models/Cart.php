@@ -15,7 +15,9 @@ class Cart extends Model
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class)->withTimestamps();
+        return $this->belongsToMany(Product::class)
+            ->withPivot('quantity')
+            ->withTimestamps();
     }
 
     public function order(): HasOne

@@ -3,10 +3,10 @@
 namespace App\Http\Requests\Cart;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
-class CartProductRequest extends FormRequest
+class DeleteCartProduct extends FormRequest
 {
     public function authorize(): bool
     {
@@ -20,7 +20,7 @@ class CartProductRequest extends FormRequest
                 'required',
                 'min:1',
                 function ($attribute, $value, $fail) {
-                    foreach($value as $id => $val) {
+                    foreach($value as $id) {
                         $product = Product::where('id', $id)->first();
                         if ($product === null) {
                             $fail('The product by id '.$id.' not found');
